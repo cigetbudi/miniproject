@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/AdminLTE/plugins/datatables/css")
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <buton typeof="button" id="btn-add" class="btn btn-success" title="Create New">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Create new
+            </buton>
+        </div>
+        <div class="panel-body">
+            <div id="table-list">
+                <div class="progress progress-striped active" style="margin-bottom:0">
+                    <div class="progress-bar" style="width:100%" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-form" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="modal-title">Employee</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body panel-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+    var progHtml = '<div class="progress progress-striped active" style="margin-bottom:0"><div class="progress-bar" style="width:100%"/></div>';
+
+    $(document).ready(function () {
+        ShowList();
+    });
+
+    function ShowList() {
+        $("#table-list").html(progHtml);
+        $.ajax({
+            url: '@Url.Action("List","Customer")',
+            type: 'get',
+            success: function (result) {
+                $("#table-list").html(result);
+            }
+        });
+    }
+
+    $("#btn-add").click(function () {
+        $.ajax({
+            url: '@Url.Action("Create","Customer")',
+            type: 'get',
+            success: function (result) {
+                $('.modal-body').html(result);
+                $("#modal-form").modal("show");
+            }
+        })
+
+    });
+    </script>
+
+
+}
