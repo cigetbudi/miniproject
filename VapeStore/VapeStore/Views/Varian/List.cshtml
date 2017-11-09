@@ -1,0 +1,118 @@
+﻿@model IEnumerable<VapeStore.ViewModel.VarianViewModel>
+
+
+<table id="data-list" class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VarianCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VarianName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Strength)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PGVG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+         
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Varian in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelVarian => Varian.VarianCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelVarian => Varian.VarianName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelVarian => Varian.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelVarian => Varian.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelVarian => Varian.Strength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelVarian => Varian.PGVG)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelVarian => Varian.Size)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelVarian => Varian.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelVarian => Varian.Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelVarian => Varian.IsActive)
+                </td>
+              
+                <td>
+                   <button type="button" value="Edit" class="btn btn-warning btn-edit" data-id="@Varian.Id" title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                   <button type="button" value="Delete" class="btn btn-danger btn-delete" data-id="@Varian.Id" title="Delete"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Scripts.Render("~/AdminLTE/plugins/datatables/js")
+<script type="text/javascript">
+    $(".btn-edit").click(function () {
+        //alert('Id nya adalah :' + $(this).attr("data-id"));
+        $.ajax({
+            url: '@Url.Action("Edit", "Varian")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-body").html(result);
+                $("#modal-form").modal("show");
+
+            }
+        });
+
+
+    });
+    $(".btn-delete").click(function () {
+        //alert('Id nya adalah :' + $(this).attr("data-id"));
+        $.ajax({
+            url: '@Url.Action("Delete", "Varian")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-body").html(result);
+                $("#modal-form").modal("show");
+
+            }
+        });
+
+
+    });
+</script>
