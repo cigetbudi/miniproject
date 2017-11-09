@@ -86,7 +86,7 @@
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App.config" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

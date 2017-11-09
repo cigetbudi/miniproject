@@ -12,17 +12,17 @@ namespace VapeStore.ViewModel
 
         public string VarianCode { get; set; }
 
-
         public string VarianName { get; set; }
 
+        public string CategoryCode { get; set; }
 
         public string ItemCode { get; set; }
 
+        public string ItemName { get; set; }
 
         public string Country { get; set; }
 
         public string Strength { get; set; }
-
 
         public string PGVG { get; set; }
 

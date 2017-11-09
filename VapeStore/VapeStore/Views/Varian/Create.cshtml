@@ -1,0 +1,159 @@
+﻿@model VapeStore.ViewModel.VarianViewModel
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>VarianViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VarianCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VarianCode)
+                @Html.ValidationMessageFor(model => model.VarianCode)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VarianName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VarianName)
+                @Html.ValidationMessageFor(model => model.VarianName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CategoryCode, (IEnumerable<SelectListItem>)ViewBag.CategoryList, "Select Category", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryCode)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ItemCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ItemCode, (IEnumerable<SelectListItem>)ViewBag.ItemList, "Select Item", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ItemCode)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Country, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Country)
+                @Html.ValidationMessageFor(model => model.Country)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Strength, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Strength)
+                @Html.ValidationMessageFor(model => model.Strength)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PGVG, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PGVG)
+                @Html.ValidationMessageFor(model => model.PGVG)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Size, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Size)
+                @Html.ValidationMessageFor(model => model.Size)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price)
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Unit, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Unit)
+                @Html.ValidationMessageFor(model => model.Unit)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActive, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsActive)
+                @Html.ValidationMessageFor(model => model.IsActive)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Create" class="btn btn-success btn-create-conf" />
+                <input type="button" value="Cancel" class="btn btn-default" data-dismiss="modal" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@Scripts.Render("~/bundles/jqueryval")
+
+   <script type="text/javascript">
+
+        $('#CategoryCode').change(function () {
+            //alert('aa')
+        $.ajax({
+            url: '@Url.Action("GetByCategory", "Item")',
+            type: 'get',
+            data: { categoryCode: $(this).val() },
+            success: function (result) {
+                $("#ItemCode").html(result);
+            }
+        });
+    });
+
+       $(".btn-create-conf").click(function () {
+           var item = {
+               Id: 0,
+               VarianCode: $("#VarianCode").val(),
+               VarianName: $("#VarianName").val(),
+               ItemCode: $("#ItemCode").val(),
+               Country: $("#Country").val(),
+               Strength: $("#Strength").val(),
+               PGVG: $("#PGVG").val(),
+               Size: $("#Size").val(),
+               Price: $("#Price").val(),
+               Unit: $("#Unit").val(),
+               IsActive: $("#IsActive").is(":checked")
+           };
+
+           //alert(JSON.stringify(item));
+           $.ajax({
+               url: '@Url.Action("Create", "Varian")',
+               type: 'post',
+               data: { model: item },
+               success: function (result) {
+                   if (result.success) {
+                       $("#modal-form").modal("hide");
+                       ShowList();
+                   } else {
+                       alert('Error : ' + result.message);
+                   }
+               }
+           });
+       });
+
+
+</script>

@@ -1,0 +1,10 @@
+﻿@model IEnumerable<VapeStore.ViewModel.ItemViewModel>
+
+<option value="">Select Item</option>
+
+
+@foreach (var item in Model) 
+{
+ 
+    <option value="@item.ItemCode">@item.ItemName</option>
+}
