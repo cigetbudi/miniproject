@@ -1,4 +1,4 @@
-﻿@model VapeStore.ViewModel.SupplierViewModel
+﻿@model VapeStore.ViewModel.CustomerViewModel
 
 
 @using (Html.BeginForm())
@@ -12,18 +12,10 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SupplierCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CostumerName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SupplierCode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SupplierCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SupplierName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SupplierName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SupplierName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.CostumerName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CostumerName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -32,6 +24,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -51,18 +51,14 @@
             </div>
         </div>
 
-        
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button type="button" value="Save Change" class="btn btn-success btn-save">Save</button>
-                <button type="button" value="Cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>  
+                <button type="button" value="Cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 }
-
-
 
 
     @Scripts.Render("~/bundles/jqueryval")
@@ -70,28 +66,31 @@
     $(".btn-save").click(function () {
         var item = {
             Id: $("#Id").val(),
-            SupplierCode: $("#SupplierCode").val(),
-            SupplierName: $("#SupplierName").val(),
+            CostumerName: $("#CostumerName").val(),
             Address: $("#Address").val(),
+            Email: $("#Email").val(),
             Phone: $("#Phone").val(),
             IsActive: $("#IsActive").is(":checked")
-
         };
-
         $.ajax({
-            url: '@Url.Action("Edit", "Supplier")',
+            url: '@Url.Action("Edit","Customer")',
             type: 'post',
             data: { model: item },
             success: function (result) {
-                if (result.success) {
+                if (result.success)
+                {
                     $("#modal-form").modal("hide");
                     ShowList();
-                } else {
-                    alert('Error : ' + result.message);
+                }
+                else
+                {
+                    alert('Error : ' + result.messsage);
                 }
             }
         });
+
     });
 
-   
-    </script>
+    
+
+</script>

@@ -38,6 +38,7 @@ namespace VapeStore.DataAccess
            using (var db = new VapeContext())
            {
                result = (from sup in db.Mst_Supplier
+                         where sup.Id ==id
                          select new SupplierViewModel
                          {
                              Id = sup.Id,

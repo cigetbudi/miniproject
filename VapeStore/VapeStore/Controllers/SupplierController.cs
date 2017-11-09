@@ -47,7 +47,7 @@ namespace VapeStore.Controllers
                 }
                 else
                 {
-                    return Json(new { succes = false, message = "Please full fill required fields!" },JsonRequestBehavior.AllowGet);
+                    return Json(new { succes = false, message = "Isi data dulu dengan benar!" },JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception ex)

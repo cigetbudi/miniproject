@@ -2,6 +2,7 @@ namespace VapeStore.DataModel
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -16,19 +17,23 @@ namespace VapeStore.DataModel
 
         public int Id { get; set; }
 
-        [Required]
         [StringLength(30)]
+        
         public string CostumerName { get; set; }
 
         [StringLength(100)]
+        
         public string Address { get; set; }
 
         [StringLength(50)]
         public string Email { get; set; }
 
+
+        
         [StringLength(12)]
         public string Phone { get; set; }
 
+        
         public bool IsActive { get; set; }
 
         public DateTime? Created { get; set; }

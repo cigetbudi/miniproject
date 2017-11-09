@@ -1,0 +1,84 @@
+﻿@model VapeStore.ViewModel.CustomerViewModel
+
+<h3>Anda ingin menghapus data ini? </h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CostumerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CostumerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="button" value="Delete" class="btn btn-danger btn-delete-conf" data-id="@Model.Id" />
+        <input type="button" value="Cancel" class="btn btn-default " data-dismiss="modal" />
+
+    </div>
+    }
+</div>
+
+<script type="text/javascript">
+    $(".btn-delete-conf").click(function () {
+        //alert('Id nya adalah :' + $(this).attr('data-id'));
+        $.ajax({
+            url: '@Url.Action("DeleteConfirm", "Customer")',
+            type: 'post',
+            data: { id: $(this).attr('data-id') },
+            success: function (result)
+            {
+                if (result.success)
+                {
+                    $("#modal-form").modal("hide");
+                    ShowList()
+                }
+                else
+                {
+                    alert('Error :' + result.message);
+
+                }
+            }
+        });
+
+    });
+</script>

@@ -15,7 +15,7 @@
     @Styles.Render("~/AdminLTE/plugins/datepicker/css")
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-yellow-light sidebar-mini">
     <div class="wrapper">
         <header class="main-header">
             <a href="@Url.Action("Index", "Home")" class="logo">
@@ -226,7 +226,7 @@
         </header>
         <aside class="main-sidebar">
             <section class="sidebar">
-                <div class="user-panel">
+                @*<div class="user-panel">
                     <div class="pull-left image">
                         <img src="~/AdminLTE/dist/img/user.svg" class="img-circle" alt="User Image">
                     </div>
@@ -234,7 +234,7 @@
                         <p>Sigit Budi</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Ngelih</a>
                     </div>
-                </div>
+                </div>*@
                 <form action="#" method="get" class="sidebar-form">
                     <div class="input-group">
                         <input type="text" name="q" class="form-control" placeholder="Search...">
@@ -247,30 +247,32 @@
                 </form>
                 <ul class="sidebar-menu">
                     <li class="header">MENU</li>
-                    <li id="left-sidebar-menu-dashboard" class="treeview">
+                    <li id="left-sidebar-menu-database" class="treeview">
                         <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Master</span> <i class="fa fa-angle-left pull-right"></i>
+                            <i class="fa fa-database text-blue text-bold"></i> <span>Master</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="Division"><a href="@Url.Action("Index", "Division")"><i class="fa fa-circle-o"></i> Division</a></li>
-                            <li id="Department"><a href="@Url.Action("Index", "Department")"><i class="fa fa-circle-o"></i> Department</a></li>
-                            <li id="JobPosition"><a href="@Url.Action("Index", "JobPosition")"><i class="fa fa-circle-o"></i> JobPosition</a></li>
-                            <li id="Employee"><a href="@Url.Action("Index", "Employee")"><i class="fa fa-circle-o"></i> Employee</a></li>
-                            <li id="Employee"><a href="@Url.Action("Index", "SalaryComponent")"><i class="fa fa-circle-o"></i> Salary Component</a></li>
+                            <li id="Supplier"><a href="@Url.Action("Index", "Supplier")"><i class="fa fa-user "></i> Supplier</a></li>
+                            <li id="Customer"><a href="@Url.Action("Index", "Customer")"><i class="fa fa-users "></i> Pelanggan</a></li>
+                            <li id="Category"><a href="@Url.Action("Index", "Category")"><i class="fa fa-tasks"></i> Kategori</a></li>
+                            <li id="Item"><a href="@Url.Action("Index", "Item")"><i class="fa fa-tags "></i> Item</a></li>
+                            <li id="Varian"><a href="@Url.Action("Index", "Varian")"><i class="fa fa-tag"></i> Varian</a></li>
 
                         </ul>
                     </li>
                     
-                    <li id="left-sidebar-menu-charts" class="treeview">
+                    <li id="left-sidebar-menu-dollar" class="treeview">
                         <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>Transaction</span>
+                            <i class="fa fa-dollar text-red text-bold"></i>
+                            <span>Transaksi</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="Payroll"><a href="@Url.Action("Index", "Payroll")"><i class="fa fa-circle-o"></i> Payroll</a></li>
-                            <li id="Payroll"><a href="@Url.Action("Index", "Selling")"><i class="fa fa-circle-o"></i> P.O.S</a></li>
-                           
+                            <li id="Selling"><a href="@Url.Action("Index", "Selling")"><i class="fa fa-upload"></i> Penjualan</a></li>
+                            <li id="Purchasing"><a href="@Url.Action("Index", "Purchasing")"><i class="fa fa-download"></i> Pembelian</a></li>
+                            <li id="SellingReturn"><a href="@Url.Action("Index", "SellingReturn")"><i class="fa fa-rotate-left"></i> Retur Penjualan</a></li>
+                            <li id="Purchasing"><a href="@Url.Action("Index", "PurchasingReturn")"><i class="fa fa-rotate-right"></i> Retur Pembelian</a></li>
+
                         </ul>
                     </li>
                     <li id="left-sidebar-menu-elements" class="treeview">
@@ -294,34 +296,7 @@
                             <li id="left-sidebar-menu-forms-editors"><a href="@Url.Action("Editors", "Forms")"><i class="fa fa-circle-o"></i> Editors</a></li>
                         </ul>
                     </li>
-                    <li id="left-sidebar-menu-tables" class="treeview">
-                        <a href="#">
-                            <i class="fa fa-table"></i> <span>Tables</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li id="left-sidebar-menu-tables-simple"><a href="@Url.Action("Simple", "Tables")"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                            <li id="left-sidebar-menu-tables-data"><a href="@Url.Action("Data", "Tables")"><i class="fa fa-circle-o"></i> Data tables</a></li>
-                        </ul>
-                    </li>
-                    <li id="left-sidebar-menu-calendar">
-                        <a href="@Url.Action("Index", "Calendar")">
-                            <i class="fa fa-calendar"></i>
-                            <span>Calendar</span>
-                            <small class="label pull-right bg-red">3</small>
-                        </a>
-                    </li>
-                    <li id="left-sidebar-menu-mailbox" class="treeview">
-                        <a href="#">
-                            <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li id="left-sidebar-menu-mailbox-inbox"><a href="@Url.Action("Inbox", "Mailbox")">Inbox <span class="label label-primary pull-right">13</span></a></li>
-                            <li id="left-sidebar-menu-mailbox-compose"><a href="@Url.Action("Compose", "Mailbox")">Compose</a></li>
-                            <li id="left-sidebar-menu-mailbox-read"><a href="@Url.Action("Read", "Mailbox")">Read</a></li>
-                        </ul>
-                    </li>
+                   
                     <li id="left-sidebar-menu-examples" class="treeview">
                         <a href="#">
                             <i class="fa fa-folder"></i> <span>Examples</span>
